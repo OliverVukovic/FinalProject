@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,16 +33,18 @@ public class PortalsTest {
     
     @AfterClass
     public static void tearDownClass() {
-        
+        driver.quit();
     }
        
     @Before
     public void setUp() {
         driver.get("http://bvtest.school.cubes.rs/login"); 
-       LoginPage loginPage = new LoginPage(driver);
-       loginPage.enterEmail("");
-       loginPage.enterPassword("");
-       loginPage.clickOnLoginButton();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterEmail("qa@cubes.rs");                                                // objekat
+        loginPage.enterPassword("cubesqa");
+        loginPage.clickOnLoginButton();
+        WebElement navPortals = driver.findElement(By.linkText("Portals"));
+        navPortals.click();
     }
     
     @After
@@ -58,14 +61,12 @@ public class PortalsTest {
         logoutButton.click();
     }
 
-    
-    // 1. Login - without parameters, if can't login try with invalid, if can't login try with valid 
+    // 1. Login (precondition)
     // 2. Open Portals section
     // 3. Add New Portal Title
-    // 4. Edit Last Added Portal Title - try without parameters, if can't try with valid.
-    // 5. Delete Last Added Portal Title
-    // 6. Logout
-  
+    // 4. Save new Portal Title
+    // 5. Logout
+     
     
     //private void login () {
      //   WebElement emailField = driver.findElement(By.name("email"));
@@ -81,5 +82,46 @@ public class PortalsTest {
     
     
     @Test
-    public void hello() {}
+    public void testInsertNewPortalName() {
+                 
+        WebElement addPortalButton = driver.findElement(By.className("pull-right"));
+        addPortalButton.click();
+        
+        WebElement titleField = driver.findElement(By.id("title"));
+        String newPortalTitle = "Srpska TV";
+        titleField.sendKeys("Srpska TV");
+        
+        WebElement urlField = driver.findElement(By.id("url"));
+        urlField.sendKeys("https://srpskatelevizija.com");
+        
+        WebElement regionField = driver.findElement(By.className("form-control"));
+        regionField.click();
+        WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
+        regionFieldName.click();
+        
+        WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
+        savePortalButton.click();
+        
+        String expectedAlertMessage = "Portal \"" + newPortalTitle + "\" has been successfully saved!";
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();
+            
+    }
+    
+    // 1. Login (precondition)
+    // 2. Open Portals section
+    // 3. Edit Last Added Portal Title - try without parameters, if can't try with valid.
+    // 4. Save new Portal Title
+    // 5. Delete Last Added Portal Title
+    // 6. Logout (postcondition)
+    
+    
+
+  
+        
+        
+        
+    
+    
+    
+    
 }
