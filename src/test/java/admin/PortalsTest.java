@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
+import pages.LogoutPage;
 
 
 public class PortalsTest {
@@ -50,17 +51,19 @@ public class PortalsTest {
     
     @After
     public void tearDown() {
-        logout();
+        LogoutPage logoutPage = new LogoutPage(driver);                             // logout();
+        logoutPage.clickOnNavDropDown();   
+        logoutPage.clickOnLogoutButton();  
     }
     
     
-    private void logout () {
-        WebElement navDropDown = driver.findElement(By.linkText("Cubes QA"));
-        navDropDown.click();
+    //private void logout () {
+     //   WebElement navDropDown = driver.findElement(By.linkText("Cubes QA"));
+     //   navDropDown.click();
 
-        WebElement logoutButton = driver.findElement(By.linkText("Logout"));
-        logoutButton.click();
-    }
+     //   WebElement logoutButton = driver.findElement(By.linkText("Logout"));
+     //   logoutButton.click();
+    //}
     
     //private void login () {
      //   WebElement emailField = driver.findElement(By.name("email"));

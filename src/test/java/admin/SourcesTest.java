@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
+import pages.LogoutPage;
 
 
 public class SourcesTest {
@@ -46,17 +47,10 @@ public class SourcesTest {
     
     @After
     public void tearDown() {
-        logout();
-    }
-
-    private void logout () {
-        WebElement navDropDown = driver.findElement(By.linkText("Cubes QA"));
-        navDropDown.click();
-
-        WebElement logoutButton = driver.findElement(By.linkText("Logout"));
-        logoutButton.click();
-    }
-    
+        LogoutPage logoutPage = new LogoutPage(driver);                             // logout();
+        logoutPage.clickOnNavDropDown();   
+        logoutPage.clickOnLogoutButton();  
+    }   
     
     
     // @Test
