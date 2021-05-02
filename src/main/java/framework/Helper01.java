@@ -8,6 +8,7 @@ public class Helper01 {
      }
      
      public static String generateTitle() {
-        return "Oliver-" + getRandomInteger();
+        return "Srpska Televizija -" + getRandomInteger();
     }
+              
 }

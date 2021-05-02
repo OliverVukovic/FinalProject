@@ -131,14 +131,6 @@ public class PortalsTest {
         String newPortalTitle = "Srpska Televizija";
         titleField.sendKeys("Srpska Televizija");
         
-        WebElement urlField = driver.findElement(By.id("url"));
-        urlField.sendKeys("https://srpskatelevizija.com");
-        
-        WebElement regionField = driver.findElement(By.className("form-control"));
-        regionField.click();
-        WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
-        regionFieldName.click();
-        
         WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
         savePortalButton.click();
         
@@ -146,7 +138,8 @@ public class PortalsTest {
         String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();
         
         
-            
+       
+                 
     }
   
         
