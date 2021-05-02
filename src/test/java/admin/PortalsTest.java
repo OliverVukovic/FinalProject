@@ -22,7 +22,6 @@ public class PortalsTest {
     private static WebDriver driver; 
     
     public PortalsTest() {
-        
     }
     
     @BeforeClass
@@ -42,7 +41,7 @@ public class PortalsTest {
     public void setUp() {
         driver.get("http://bvtest.school.cubes.rs/login"); 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail("qa@cubes.rs");                                                // objekat
+        loginPage.enterEmail("qa@cubes.rs");                                    // objekat
         loginPage.enterPassword("cubesqa");
         loginPage.clickOnLoginButton();
         WebElement navPortals = driver.findElement(By.linkText("Portals"));
