@@ -115,7 +115,39 @@ public class PortalsTest {
     // 6. Logout (postcondition)
     
     
-
+    @Test
+    public void testEditAndDeleteLastAddedPortalName() {
+        
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,30000)");
+                 
+        WebElement editPortalIcon = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[39]/td[5]/div/a/span"));
+        editPortalIcon.click();
+        
+        WebElement titleField = driver.findElement(By.id("title"));
+        driver.findElement(By.xpath("//*[@id=\"title\"]")).clear();
+        //driver.findElement(By.xpath("//*[@id=\"title\"]")).sendKeys("Srpska Televizija");
+        
+        String newPortalTitle = "Srpska Televizija";
+        titleField.sendKeys("Srpska Televizija");
+        
+        WebElement urlField = driver.findElement(By.id("url"));
+        urlField.sendKeys("https://srpskatelevizija.com");
+        
+        WebElement regionField = driver.findElement(By.className("form-control"));
+        regionField.click();
+        WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
+        regionFieldName.click();
+        
+        WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
+        savePortalButton.click();
+        
+        String expectedAlertMessage = "Portal \"" + newPortalTitle + "\" has been successfully saved!";
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();
+        
+        
+            
+    }
   
         
         
