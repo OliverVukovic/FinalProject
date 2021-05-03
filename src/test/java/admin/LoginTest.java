@@ -59,9 +59,9 @@ public class LoginTest {
     @Test
     public void testEmptyFieldsLogin() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail("");
+        loginPage.enterEmail("");                                                // "loginPage" je objekat
         loginPage.enterPassword("");
-        loginPage.clickOnLoginButton();        
+        loginPage.clickOnLoginButton();                                          // poruka se pojavljuje: upisi podatke
     }
     
     @Test
@@ -69,7 +69,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail("oliver@cubes.rs");
         loginPage.enterPassword("1234");
-        loginPage.clickOnLoginButton();
+        loginPage.clickOnLoginButton();                                           // poruka se pojavljuje: upisi ispravne podatke 
     }
     @Test
     public void testValidLogin() {
@@ -77,6 +77,13 @@ public class LoginTest {
         loginPage.enterEmail("qa@cubes.rs");
         loginPage.enterPassword("cubesqa");
         loginPage.clickOnLoginButton();
+        
+        String expectedUrl = "http://bvtest.school.cubes.rs/admin";
+        String actualUrl = driver.getCurrentUrl();
+        
+        assertTrue("Wrong URL redirection!", expectedUrl.equals(actualUrl));
+        
+        
         logout();
     }
 
