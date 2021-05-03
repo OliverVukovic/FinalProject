@@ -1,5 +1,6 @@
 package admin;
 
+import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -100,10 +101,71 @@ public class SourcesTest {
     }
     
     
+    //Disable last added Source, check it and enable again
+    //1. Find user Source in Sources table
+    //2. Find "Disable" icon button in Actions column and click on    
+    //3. Click on blue "Disable" button in pop-up field
+    //4. Find Source status drop-down field, choose "Disabled" and click on
+    //5. Find user Source in new table
+    //6. Find "Enable" Actions button in Actions column and click on
+    //7. Click on blue "Enable" button in pop-up field
+    //8. Find Source status drop-down field, choose "Enabled" and click on
+    
+    @Test
+    public void testDisableEnableLastAddedSource() {
+    
+        WebElement disableIconButton = driver.findElement(By.xpath("//*[@id=\"sourcesTable\"]/tbody/tr[1]/td[8]/div/button[1]/span"));
+        disableIconButton.click();
+        
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        
+        WebElement disableButton = driver.findElement(By.xpath("//*[@id=\"sourceDisableDialog\"]/div/div/div[3]/button[2]"));
+        disableButton.click();
+        
+        WebElement sourceStatusFieldDropDown = driver.findElement(By.id("sourceStatusSelect"));
+        sourceStatusFieldDropDown.click();
+        WebElement sourceStatusFieldName = driver.findElement(By.xpath("//*[@id=\"sourceStatusSelect\"]/option[3]"));
+        sourceStatusFieldName.click();
+        
+        WebElement enableIconButton = driver.findElement(By.xpath("//*[@id=\"sourcesTable\"]/tbody/tr/td[8]/div/button[1]/span"));
+        enableIconButton.click();
+        
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        
+        WebElement enableButton = driver.findElement(By.xpath("//*[@id=\"sourceEnableDialog\"]/div/div/div[3]/button[2]"));
+        enableButton.click();
+        
+    }
     
     
+    //Find the element using Portal and Category tables inside Sources and delete it
+    //1. Click Sources link on NavBar and go to the Sources page (precondition)
+    //2. Find Portal drop-down field in the table and click on valid Portal
+    //3. Find Category drop-down field in the table and click on valid Category
+    //4. Find "Delete" icon button in Actions buttons and click on
+    //5. Click on blue "Delete" button in pop-up field
     
+    @Test
+    public void testFindElementAndDeleteIt() {
     
+        WebElement sourcePortalFieldDropDown = driver.findElement(By.id("sourcePortalSelect"));
+        sourcePortalFieldDropDown.click();
+        WebElement sourcePortalFieldName = driver.findElement(By.xpath("//*[@id=\"sourcePortalSelect\"]/option[2]"));
+        sourcePortalFieldName.click();
+        
+        WebElement sourceCategoryFieldDropDown = driver.findElement(By.id("sourceCategorySelect"));
+        sourceCategoryFieldDropDown.click();
+        WebElement sourceCategoryFieldName = driver.findElement(By.xpath("//*[@id=\"sourceCategorySelect\"]/option[14]"));
+        sourceCategoryFieldName.click();
+        
+        WebElement deleteIconButton = driver.findElement(By.xpath("//*[@id=\"sourcesTable\"]/tbody/tr/td[8]/div/button[2]/span"));
+        deleteIconButton.click();
+        
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        
+        WebElement deleteSourceButton = driver.findElement(By.xpath("//*[@id=\"sourceDeleteDialog\"]/div/div/div[3]/button[2]"));
+        deleteSourceButton.click();
     
+    }
     
 }
