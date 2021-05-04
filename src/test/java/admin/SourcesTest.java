@@ -114,7 +114,7 @@ public class SourcesTest {
     //8. Find Source status drop-down field, choose "Enabled" and click on
     
     @Test
-    public void testDisableEnableLastAddedSource() {
+    public void testDisableEnableFirstRowSource() {
     
         WebElement disableIconButton = driver.findElement(By.xpath("//*[@id=\"sourcesTable\"]/tbody/tr[1]/td[8]/div/button[1]/span"));
         disableIconButton.click();

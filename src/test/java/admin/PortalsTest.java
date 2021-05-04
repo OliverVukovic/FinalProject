@@ -14,6 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
 import pages.LogoutPage;
@@ -22,6 +23,8 @@ import pages.LogoutPage;
 public class PortalsTest {
     
     private static WebDriver driver; 
+ //   private static WebDriverWait wait;
+
     
     public PortalsTest() {
     }
@@ -58,6 +61,8 @@ public class PortalsTest {
     }
     
     
+    
+    
     //private void logout () {
      //   WebElement navDropDown = driver.findElement(By.linkText("Cubes QA"));
      //   navDropDown.click();
@@ -90,8 +95,8 @@ public class PortalsTest {
         addPortalButton.click();
         
         WebElement titleField = driver.findElement(By.id("title"));
-        String newPortalTitle = "Srpska TV";
-        titleField.sendKeys("Srpska TV");
+        String newPortalTitle = Helper01.generateTitle();
+        titleField.sendKeys(newPortalTitle); 
         
         WebElement urlField = driver.findElement(By.id("url"));
         urlField.sendKeys("https://srpskatelevizija.com");
@@ -119,12 +124,12 @@ public class PortalsTest {
     // 6. Logout (postcondition)
     
     @Test
-    public void testEditLastAddedPortalWithoutName() {
+    public void testEdit35thPortalWithoutName() {
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");
                  
-        WebElement editPortalIcon = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[39]/td[5]/div/a/span"));
+        WebElement editPortalIcon = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[35]/td[5]/div/a/span"));
         editPortalIcon.click();
         
         WebElement portalTitleField = driver.findElement(By.id("title"));
@@ -133,18 +138,31 @@ public class PortalsTest {
         WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
         savePortalButton.click();
         
+    //    WebElement popUpMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("help-block")));
+
+        
         
         //Alert alert = driver.switchTo().alert();
         
-        //String expectedAlertMessage = "Please fill out this field.";
-        //String actualAlertMessage = driver.switchTo().alert().getText();         //- pronađi način da dohvatiš popup element
+    //    String expectedAlertMessage = "Please fill out this field.";
+    //    String actualAlertMessage = popUpMessage.getText();    // - ne radi
+                
+                //driver.switchTo().alert().getText();         //- pronađi način da dohvatiš popup element
     
-        //assertTrue("Olivere, title field alert message (in edit no name test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
+        //driver.findElement(By.className("alert-success")).getText(); 
+        
+    //    assertTrue("Olivere, title field alert message (in edit no name test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
+    
+        
+        
+        
+    
+    
     }
     
     
     @Test
-    public void testEditLastAddedPortalName() {
+    public void testEditAddedPortalName() {
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");
@@ -176,7 +194,7 @@ public class PortalsTest {
     // 6. Logout (postcondition)    
     
     @Test
-    public void testDeleteLastAddedPortalName() {
+    public void testDeleteAddedPortalName() {
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");

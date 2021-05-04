@@ -38,7 +38,7 @@ public class LoginTest {
     
     @After
     public void tearDown() {
-        
+       
     }
     
     private void logout () {
@@ -59,8 +59,8 @@ public class LoginTest {
     @Test
     public void testEmptyFieldsLogin() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail("");                                                // "loginPage" je objekat
-        loginPage.enterPassword("");                                             // email i password bespotrebni
+        //loginPage.enterEmail("");                                                // "loginPage" je objekat
+        //loginPage.enterPassword("");                                             // email i password bespotrebni
         loginPage.clickOnLoginButton();                                        
    
         String expectedAlertEmailMessage = "The email field is required.";   
