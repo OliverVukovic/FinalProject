@@ -60,17 +60,35 @@ public class LoginTest {
     public void testEmptyFieldsLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail("");                                                // "loginPage" je objekat
-        loginPage.enterPassword("");
-        loginPage.clickOnLoginButton();                                          // poruka se pojavljuje: upisi podatke
+        loginPage.enterPassword("");                                             // email i password bespotrebni
+        loginPage.clickOnLoginButton();                                        
+   
+        String expectedAlertEmailMessage = "The email field is required.";   
+        String actualAlertEmailMessage = driver.findElement(By.className("help-block")).getText();
+        
+        assertTrue("Olivere, konjino jedna, response Email message isn't good!", expectedAlertEmailMessage.equals(actualAlertEmailMessage));
+        
+        String expectedAlertPasswordMessage = "The password field is required.";   
+        String actualAlertPasswordMessage = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/div[2]/div/span/strong")).getText();
+        
+        assertTrue("Olivere, konjino jedna glupa, response Password message isn't good!", expectedAlertPasswordMessage.equals(actualAlertPasswordMessage));
     }
+    
     
     @Test
     public void testInvalidParametersLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail("oliver@cubes.rs");
         loginPage.enterPassword("1234");
-        loginPage.clickOnLoginButton();                                           // poruka se pojavljuje: upisi ispravne podatke 
+        loginPage.clickOnLoginButton();      
+        
+        String expectedAlertMessage = "These credentials do not match our records.";   
+        String actualAlertMessage = driver.findElement(By.className("help-block")).getText();
+        
+        assertTrue("Olivere, response message isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
+    
+    
     @Test
     public void testValidLogin() {
         LoginPage loginPage = new LoginPage(driver);
@@ -81,9 +99,8 @@ public class LoginTest {
         String expectedUrl = "http://bvtest.school.cubes.rs/admin";
         String actualUrl = driver.getCurrentUrl();
         
-        assertTrue("Wrong URL redirection!", expectedUrl.equals(actualUrl));
-        
-        
+        assertTrue("Olivere, URL redirection is wrong!", expectedUrl.equals(actualUrl));
+                
         logout();
     }
 

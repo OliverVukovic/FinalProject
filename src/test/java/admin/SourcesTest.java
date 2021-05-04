@@ -54,7 +54,7 @@ public class SourcesTest {
     }   
     
     
-    //1. Click "Sources" in Navigation bar
+    //1. Click "Sources" in Navigation bar (precondition)
     //2. After redirection on new page,find "+ Add source" button in the upper right corner
     //3. Click on the "+ Add source" button
     //4. After next redirection click on drop-down sign in Portal field and choose valid portal

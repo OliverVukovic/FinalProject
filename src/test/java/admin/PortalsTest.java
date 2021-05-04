@@ -77,7 +77,7 @@ public class PortalsTest {
     //}
     
     // 1. Login (precondition)
-    // 2. Open Portals section
+    // 2. Open Portals section (precondition)
     // 3. Add New Portal Title
     // 4. Save new Portal Title
     // 5. Logout
@@ -109,7 +109,7 @@ public class PortalsTest {
     
     
     // 1. Login (precondition)
-    // 2. Open Portals section
+    // 2. Open Portals section (precondition)
     // 3. Edit Last Added Portal Title - try without parameters, if can't try with valid.
     // 4. Save new Portal Title
     // 5. Delete Last Added Portal Title
@@ -124,7 +124,7 @@ public class PortalsTest {
         WebElement editPortalIcon = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[39]/td[5]/div/a/span"));
         editPortalIcon.click();
         
-        WebElement titleField = driver.findElement(By.id("title"));
+        WebElement portalTitleField = driver.findElement(By.id("title"));
         driver.findElement(By.xpath("//*[@id=\"title\"]")).clear();
         
         WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
@@ -159,7 +159,7 @@ public class PortalsTest {
 
     
     // 1. Login (precondition)
-    // 2. Open Portals section
+    // 2. Open Portals section (precondition)
     // 3. Edit Last Added Portal Title - try without parameters, if can't try with valid.
     // 4. Save new Portal Title
     // 5. Delete Last Added Portal Title
@@ -182,6 +182,8 @@ public class PortalsTest {
         deletePortalButton.click();
         
         String expectedAlertMessage = "Portal \"" + portalTitleName + "\" has been successfully deleted!";
-        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();            
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();       
+        
+        //assertTrue("Wrong URL redirection!", expectedUrl.equals(actualUrl));
     }        
 }
