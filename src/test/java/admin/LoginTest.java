@@ -66,12 +66,12 @@ public class LoginTest {
         String expectedAlertEmailMessage = "The email field is required.";   
         String actualAlertEmailMessage = driver.findElement(By.className("help-block")).getText();
         
-        assertTrue("Olivere, konjino jedna, response Email message isn't good!", expectedAlertEmailMessage.equals(actualAlertEmailMessage));
+        assertTrue("Olivere, konjino jedna, alert Email message isn't good!", expectedAlertEmailMessage.equals(actualAlertEmailMessage));
         
         String expectedAlertPasswordMessage = "The password field is required.";   
         String actualAlertPasswordMessage = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/div[2]/div/span/strong")).getText();
         
-        assertTrue("Olivere, konjino jedna glupa, response Password message isn't good!", expectedAlertPasswordMessage.equals(actualAlertPasswordMessage));
+        assertTrue("Olivere, konjino jedna glupa, alert Password message isn't good!", expectedAlertPasswordMessage.equals(actualAlertPasswordMessage));
     }
     
     
@@ -85,7 +85,7 @@ public class LoginTest {
         String expectedAlertMessage = "These credentials do not match our records.";   
         String actualAlertMessage = driver.findElement(By.className("help-block")).getText();
         
-        assertTrue("Olivere, response message isn't good!", expectedAlertMessage.equals(actualAlertMessage));
+        assertTrue("Olivere, alert message isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
     
     

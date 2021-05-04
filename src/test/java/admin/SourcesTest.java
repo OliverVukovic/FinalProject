@@ -97,7 +97,9 @@ public class SourcesTest {
         saveSourceButton.click();
         
         String expectedAlertMessage = "Source \"" + newSourceTitle + "\" has been successfully saved!";
-        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();     
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();   
+        
+        assertTrue("Olivere, table alert message isn't good!", expectedAlertMessage.equals(actualAlertMessage));       
     }
     
     
@@ -122,6 +124,12 @@ public class SourcesTest {
         WebElement disableButton = driver.findElement(By.xpath("//*[@id=\"sourceDisableDialog\"]/div/div/div[3]/button[2]"));
         disableButton.click();
         
+        String sourceTitle = "Srpska Televizija";
+        String expectedDisableAlertMessage = "Source \"" + sourceTitle + "\" has been disabled";
+        String actualDisableAlertMessage = driver.findElement(By.className("alert-success")).getText();   
+        
+        assertTrue("Olivere, disable alert message isn't good!", expectedDisableAlertMessage.equals(actualDisableAlertMessage)); 
+        
         WebElement sourceStatusFieldDropDown = driver.findElement(By.id("sourceStatusSelect"));
         sourceStatusFieldDropDown.click();
         WebElement sourceStatusFieldName = driver.findElement(By.xpath("//*[@id=\"sourceStatusSelect\"]/option[3]"));
@@ -135,6 +143,10 @@ public class SourcesTest {
         WebElement enableButton = driver.findElement(By.xpath("//*[@id=\"sourceEnableDialog\"]/div/div/div[3]/button[2]"));
         enableButton.click();
         
+        String expectedEnableAlertMessage = "Source \"" + sourceTitle + "\" has been enabled";
+        String actualEnableAlertMessage = driver.findElement(By.className("alert-success")).getText();   
+        
+        assertTrue("Olivere, enable alert message isn't good!", expectedEnableAlertMessage.equals(actualEnableAlertMessage)); 
     }
     
     
@@ -148,6 +160,8 @@ public class SourcesTest {
     @Test
     public void testFindElementAndDeleteIt() {
     
+        String sourceTitleName = "Srpska Televizija";
+        
         WebElement sourcePortalFieldDropDown = driver.findElement(By.id("sourcePortalSelect"));
         sourcePortalFieldDropDown.click();
         WebElement sourcePortalFieldName = driver.findElement(By.xpath("//*[@id=\"sourcePortalSelect\"]/option[2]"));
@@ -166,6 +180,10 @@ public class SourcesTest {
         WebElement deleteSourceButton = driver.findElement(By.xpath("//*[@id=\"sourceDeleteDialog\"]/div/div/div[3]/button[2]"));
         deleteSourceButton.click();
     
+        String expectedAlertMessage = "Source \"" + sourceTitleName + "\" has been successfully deleted!";
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();       
+        
+        assertTrue("Olivere, da li si ćorav!? Table alert message isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
     
 }

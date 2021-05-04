@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -104,7 +105,9 @@ public class PortalsTest {
         savePortalButton.click();
         
         String expectedAlertMessage = "Portal \"" + newPortalTitle + "\" has been successfully saved!";
-        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();     
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();  
+        
+        assertTrue("Olivere, table alert message (in insert test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
     
     
@@ -130,8 +133,13 @@ public class PortalsTest {
         WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
         savePortalButton.click();
         
+        
+        //Alert alert = driver.switchTo().alert();
+        
         //String expectedAlertMessage = "Please fill out this field.";
-        //String actualAlertMessage = driver.findElement(By.xpath("")).getText();         - pronađi način da dohvatiš popup element
+        //String actualAlertMessage = driver.switchTo().alert().getText();         //- pronađi način da dohvatiš popup element
+    
+        //assertTrue("Olivere, title field alert message (in edit no name test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
     
     
@@ -154,7 +162,9 @@ public class PortalsTest {
         savePortalButton.click();
         
         String expectedAlertMessage = "Portal \"" + newPortalTitle + "\" has been successfully saved!";
-        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();            
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();      
+        
+        assertTrue("Olivere, table alert message (in edit test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }
 
     
@@ -184,6 +194,6 @@ public class PortalsTest {
         String expectedAlertMessage = "Portal \"" + portalTitleName + "\" has been successfully deleted!";
         String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();       
         
-        //assertTrue("Wrong URL redirection!", expectedUrl.equals(actualUrl));
+        assertTrue("Olivere, table alert message (in delete test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }        
 }
