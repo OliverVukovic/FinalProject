@@ -69,7 +69,7 @@ public class RegionsTest {
         addRegionButton.click();
         
         WebElement regionsTitleField = driver.findElement(By.id("title"));
-        String newRegionsTitle = "Oliver-12";
+        String newRegionsTitle = "Oliver-12345";
         regionsTitleField.sendKeys(newRegionsTitle); 
         
         WebElement saveRegionButton = driver.findElement(By.id("save-region-button"));
@@ -77,6 +77,14 @@ public class RegionsTest {
         
         WebElement navPortals = driver.findElement(By.linkText("Portals"));
         navPortals.click();
+        
+        WebElement addPortalButton = driver.findElement(By.className("pull-right"));
+        addPortalButton.click();
+        
+        WebElement regionField = driver.findElement(By.className("form-control"));
+        regionField.click();
+        WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
+        regionFieldName.click();
     }
     
     

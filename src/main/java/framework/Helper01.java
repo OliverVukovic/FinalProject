@@ -10,5 +10,9 @@ public class Helper01 {
      public static String generateTitle() {
         return "Srpska Televizija -" + getRandomInteger();
     }
+     
+     public static String generateTitleName() {
+        return "Oliver Vukovic -" + getRandomInteger();
+    }
               
 }
