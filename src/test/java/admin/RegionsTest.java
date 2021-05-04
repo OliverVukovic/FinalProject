@@ -1,5 +1,6 @@
 package admin;
 
+import framework.Helper01;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -69,12 +70,12 @@ public class RegionsTest {
         addRegionButton.click();
         
         WebElement regionsTitleField = driver.findElement(By.id("title"));
-        String newRegionsTitle = "Oliver-12345";
+        String newRegionsTitle = Helper01.generateTitleName();
         regionsTitleField.sendKeys(newRegionsTitle); 
         
         WebElement saveRegionButton = driver.findElement(By.id("save-region-button"));
         saveRegionButton.click();
-        
+                
         WebElement navPortals = driver.findElement(By.linkText("Portals"));
         navPortals.click();
         
@@ -83,8 +84,13 @@ public class RegionsTest {
         
         WebElement regionField = driver.findElement(By.className("form-control"));
         regionField.click();
-        WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
+        WebElement regionFieldName = driver.findElement(By.cssSelector("select.form-control option:last-of-type"));  //pseudo klasa
         regionFieldName.click();
+        
+        String expectedSelection = newRegionsTitle;
+        String actualSelection = driver.findElement(By.cssSelector("select.form-control option:last-of-type")).getText();
+        System.out.println("Ispravno je: " + actualSelection);
+        assertTrue("Olivere, ovde nešto nije u redu!", expectedSelection.equals(actualSelection));
     }
     
     
