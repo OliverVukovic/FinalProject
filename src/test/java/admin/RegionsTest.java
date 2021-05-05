@@ -89,7 +89,7 @@ public class RegionsTest {
         
         String expectedSelection = newRegionsTitle;
         String actualSelection = driver.findElement(By.cssSelector("select.form-control option:last-of-type")).getText();
-        System.out.println("Ispravno je: " + actualSelection);
+       // System.out.println("Ispravno je: " + actualSelection);
         assertTrue("Olivere, ovde nešto nije u redu!", expectedSelection.equals(actualSelection));
     }
     

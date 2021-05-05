@@ -14,5 +14,9 @@ public class Helper01 {
      public static String generateTitleName() {
         return "Oliver Vukovic -" + getRandomInteger();
     }
+     
+     public static String generatePortalName() {
+        return "Navali Narode -" + getRandomInteger();
+    }
               
 }

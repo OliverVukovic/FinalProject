@@ -1,6 +1,7 @@
 package admin;
 
 import framework.Helper01;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -101,8 +102,8 @@ public class PortalsTest {
         WebElement urlField = driver.findElement(By.id("url"));
         urlField.sendKeys("https://srpskatelevizija.com");
         
-        WebElement regionField = driver.findElement(By.className("form-control"));
-        regionField.click();
+        WebElement regionDropDownField = driver.findElement(By.className("form-control"));
+        regionDropDownField.click();
         WebElement regionFieldName = driver.findElement(By.xpath("//*[@id=\"app-layout\"]/div/div/div/div/div[2]/form/fieldset/div[3]/div/select/option[5]"));
         regionFieldName.click();
         
@@ -124,7 +125,7 @@ public class PortalsTest {
     // 6. Logout (postcondition)
     
     @Test
-    public void testEdit35thPortalWithoutName() {
+    public void testEdit35thPortalRowWithoutName() {                             // potrebna dopuna - PITAJ MILOMIRA!
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");
@@ -138,31 +139,42 @@ public class PortalsTest {
         WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
         savePortalButton.click();
         
-    //    WebElement popUpMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("help-block")));
-
-        
-        
-        //Alert alert = driver.switchTo().alert();
-        
-    //    String expectedAlertMessage = "Please fill out this field.";
-    //    String actualAlertMessage = popUpMessage.getText();    // - ne radi
+    //WebElement popUpMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("help-block")));     
+    //Alert alert = driver.switchTo().alert();   
+    //String expectedAlertMessage = "Please fill out this field.";
+    //String actualAlertMessage = popUpMessage.getText();    // - ne radi
                 
-                //driver.switchTo().alert().getText();         //- pronađi način da dohvatiš popup element
-    
-        //driver.findElement(By.className("alert-success")).getText(); 
-        
-    //    assertTrue("Olivere, title field alert message (in edit no name test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
-    
-        
-        
-        
-    
-    
+    //driver.switchTo().alert().getText();         //- pronađi način da dohvatiš popup element
+    //driver.findElement(By.className("alert-success")).getText(); 
+    //assertTrue("Olivere, title field alert message (in edit no name test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));       
     }
+ 
+    
+    @Test
+    public void testEditLastAddedPortalName() {
+       List <WebElement> locators = driver.findElements(By.cssSelector("a[title=\"Edit\"]"));  // dohvati edit ikonu uz pomoc selektora
+       int i = locators.size() - 1;
+       locators.get(i).click();                                                                // redni broj u tabeli je uvek za 1 veci, jer ne krece od "nule" 
+       
+       String newPortalTitle = Helper01.generatePortalName();
+       
+       WebElement portalTitleField = driver.findElement(By.id("title"));
+       driver.findElement(By.xpath("//*[@id=\"title\"]")).clear();
+       portalTitleField.sendKeys(newPortalTitle);
+       WebElement savePortalButton = driver.findElement(By.id("save-portal-button"));
+       savePortalButton.click();
+       
+       String expectedAlertMessage = "Portal \"" + newPortalTitle + "\" has been successfully saved!";
+       String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();      
+        
+       assertTrue("Olivere, table alert message (in edit test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
+    }
+     
+     
     
     
     @Test
-    public void testEditAddedPortalName() {
+    public void testEdit39thRowPortalName() {
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");
@@ -194,12 +206,12 @@ public class PortalsTest {
     // 6. Logout (postcondition)    
     
     @Test
-    public void testDeleteAddedPortalName() {
+    public void testDelete44thPortalName() {
         
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,30000)");
         
-        String portalTitleName = "Srpska TV";
+        String portalTitleName = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[44]/td[3]")).getText();
                  
         WebElement deletePortalIcon = driver.findElement(By.xpath("//*[@id=\"portalsTable\"]/tbody/tr[44]/td[5]/div/button[2]/span"));
         deletePortalIcon.click(); 
@@ -214,4 +226,28 @@ public class PortalsTest {
         
         assertTrue("Olivere, table alert message (in delete test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
     }        
+    
+ 
+    @Test
+    public void testDeleteLastPortalName() {
+        
+        List <WebElement> locators = driver.findElements(By.cssSelector("button[title=\"Delete\"]"));  // dohvati edit ikonu uz pomoc selektora
+       int i = locators.size() - 1;
+       locators.get(i).click(); 
+        
+        String portalTitleName = driver.findElement(By.cssSelector("tbody.ui-sortable tr:last-of-type>td:nth-of-type(3)")).getText(); 
+        
+               
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        
+        WebElement deletePortalButton = driver.findElement(By.xpath("//*[@id=\"portalDeleteDialog\"]/div/div/div[3]/button[2]"));
+        deletePortalButton.click();
+        
+        String expectedAlertMessage = "Portal \"" + portalTitleName + "\" has been successfully deleted!";
+        String actualAlertMessage = driver.findElement(By.className("alert-success")).getText();        
+        //System.out.println(portalTitleName);
+        assertTrue("Olivere, table alert message (in delete test) isn't good!", expectedAlertMessage.equals(actualAlertMessage));
+    }        
+    
+    
 }
